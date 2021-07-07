@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>参加者変更</title>
+</head>
+
+<body>
+
+    <h2>参加者変更(change.html)</h2>
+
+    <form th:method="post" th:object="${users}" th:action="@{/users/change/id={id}(id=*{id})}">
+        <label>ID:<input type="text" th:field="*{id}"></label><br>
+        <label>名前:<input type="text" th:field="*{name}"></label><br>
+        <label>アウト:<input type="text" th:field="*{age}"></label><br>
+        <button>変更</button>
+    </form>
+
+</body>
+</html>

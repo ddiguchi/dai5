@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>笑ってはいけないJava</title>
+</head>
+<body>
+
+    <h1>笑ってはいけない大喜利(top.html)</h1>
+    <p>参加者一覧</p>
+
+    <div th:if="!${users.size()}">
+        <p>登録されている参加者はいません</p>
+    </div>
+
+    <a th:href="@{/users/register}"><!-- URL「/users/register」生成 -->
+        <button>新しい参加者を登録</button>
+    </a>
+
+    <table th:if="${users.size()}" border=1>
+    <!-- DB内のデータがtrue = 0以外の時 -->
+
+        <thead>
+            <tr>
+                <th>ID(PRIMARY KEY)</th>
+                <th>名前</th>
+                <th>アウト</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="users:${users}"　th:object="${users}">
+                <td th:text="*{id}"></td>
+                <td th:text="*{name}"></td>
+                <td th:text="*{age}"></td>
+                <td><a th:href="@{/users/details/id={id}(id=*{id})}"><button>詳細</button></a></td>
+                <td><a th:href="@{/users/change/id={id}(id=*{id})}"><button>変更</button></a></td>
+                <td>
+                    <form th:method="post" th:action="@{/users/delete/id={id}(id=*{id})}"><button>削除</button></a>
+                    </form></td>
+            </tr>
+        </tbody>
+
+    </table>
+
+</body>
